@@ -3,19 +3,47 @@
 ## Introduction
 
 This repository contains a sample QR code generator function. You can deploy it on DigitalOcean's App Platform as a Serverless Function component.
-
-**Note: This feature is currently in a [limited beta release](https://docs.digitalocean.com/products/platform/product-lifecycle/#beta). Following these steps may result in charges for the use of DigitalOcean services.**
+Documentation is available at https://docs.digitalocean.com/products/functions.
 
 ### Requirements
 
 * You need a DigitalOcean account. If you don't already have one, you can sign up at [https://cloud.digitalocean.com/registrations/new](https://cloud.digitalocean.com/registrations/new).
-* You need to have access to the beta release of App Platform Serverless Functions. You can sign up for notifications about beta and early access releases [using this form](https://www.digitalocean.com/nimbella).
+* To deploy from the command line, you will need the [DigitalOcean `doctl` CLI](https://github.com/digitalocean/doctl/releases).
 
 ## Deploying the Function
 
-During the beta, documentation for Serverless Functions will be available to beta participants only in the [Serverless Functions Closed Beta Google Doc](https://docs.google.com/document/d/1qhxnl4ndb0Jh2WkNnNLa2lAUo6u7EAfLyBlUsaPZA0Y). Please refer to this document for instructions on how to deploy Serverless Functions in App Platform.
+```
+# clone this repo
+git clone git@github.com:digitalocean/sample-functions-nodejs-qrcode.git
+```
+
+```
+# deploy the project
+> doctl serverless deploy sample-functions-nodejs-qrcode
+Deploying 'sample-functions-nodejs-qrcode'
+  to namespace 'fn-...'
+  on host 'https://faas-...'
+Started running npm install --production in sample-functions-nodejs-qrcode/default/qr
+Finished running npm install --production in sample-functions-nodejs-qrcode/default/qr
+...
+
+Deployed functions ('doctl sbx fn get <funcName> --url' for URL):
+  - qr
+```
 
 ## Using the Function
+
+```
+> doctl serverless functions invoke qr -p text:hello
+{
+  "body": "data:image/png;base64,iVB...5CYII=",
+  "headers": {
+    "content-type": "text/html; charset=UTF-8"
+  }
+}
+```
+
+### Project File Structure
 
 This app is a stateless single-page web application that generates a [QR code](https://en.wikipedia.org/wiki/QR_code) from text that a user submits.
 
@@ -24,8 +52,6 @@ This project has the following components:
 - A single [`index.html`](./client/index.html) file, which has a field for a visitor to enter some text and click **Submit**.
 - A single JavaScript file [`qr.js`](./packages/default/qr/qr.js) that provides the backend logic for the conversion of text to QR code.
 - A Node package manager file called [`package.json`](./packages/default/qr/package.json), which describes what dependencies the function has.
-
-### Project File Structure
 
 The GitHub project has the file structure that App Platform uses to intelligently deploy the project:
 
@@ -46,4 +72,4 @@ The [`package.json`](./packages/default/qr/package.json) file in the [`qr`](./pa
 
 ### Learn More
 
-You can learn more about App Platform and how to manage and update your application in [the official App Platform Documentation](https://www.digitalocean.com/docs/app-platform/).
+You can learn more about Functions and App Platform integration in [the official App Platform Documentation](https://www.digitalocean.com/docs/app-platform/).
