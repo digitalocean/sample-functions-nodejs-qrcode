@@ -3,14 +3,14 @@ alerts:
 - rule: DOMAIN_FAILED
 functions:
 - github:
-    branch: master
+    branch: main
     deploy_on_push: true
     repo: digitalocean/sample-functions-nodejs-qrcode
   name: qrcode
   routes:
-  - path: /api
+  - path: /sample-functions-nodejs-qrcode2
   source_dir: /
-name: qrcode
+name: qrcode-app
 static_sites:
 - build_command: ./build.sh
   environment_slug: html
@@ -19,11 +19,11 @@ static_sites:
     scope: BUILD_TIME
     value: ${qrcode.PUBLIC_URL}
   github:
-    branch: master
+    branch: main
     deploy_on_push: true
     repo: digitalocean/sample-functions-nodejs-qrcode
-  name: web-app
+  name: qrcode-ui
   output_dir: dist
   routes:
   - path: /
-  source_dir: /client
+  source_dir: web
