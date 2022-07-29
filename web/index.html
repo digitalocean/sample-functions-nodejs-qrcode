@@ -19,7 +19,7 @@
 
 <body style="padding-top:100px">
   <div class="container" style="width:650px">
-    <center><img width="350px" src="%%PUBLIC_URL%%/assets/do.png"></center>
+    <center><img width="350px" src="/assets/do.png"></center>
     <h2>Cloud-native by construction.<br />No tools added.</h2>
     <form id="myform" onsubmit="generate(); return false">
       <div class="form-group">
@@ -38,12 +38,12 @@
     var envAPI = undefined
 
     $("#mysubmit").click(function () {
-      envAPI = '/default/qr-java'
+      envAPI = '/qr/qr-java'
       doit()
     })
 
     $("#mysubmitjs").click(function () {
-      envAPI = '/default/qr'
+      envAPI = '/qr/qr'
       doit()
     })
 
