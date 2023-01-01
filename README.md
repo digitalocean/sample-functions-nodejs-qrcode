@@ -34,7 +34,7 @@ Deployed functions ('doctl sbx fn get <funcName> --url' for URL):
 ## Using the Function
 
 ```
-> doctl serverless functions invoke qr -p text:hello
+> doctl serverless functions invoke qr/qr -p text:hello
 {
   "body": "data:image/png;base64,iVB...5CYII=",
   "headers": {
